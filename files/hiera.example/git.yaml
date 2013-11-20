@@ -1,0 +1,51 @@
+---
+gitlab::git_user: git
+gitlab::git_home: /opt/git
+gitlab::git_email: "%{::fqdn}"
+gitlab::git_comment: GitLab
+gitlab::gitlab_domain: "%{::fqdn}"
+gitlab::gitlab_dbtype: mysql
+gitlab::gitlab_dbname: gitlabdb
+gitlab::gitlab_dbuser: git
+gitlab::gitlab_dbpwd: database_password
+gitlab::gitlab_repodir: /opt/git
+gitlab::gitlab_projects: 1000
+gitlab::ldap_enabled: false
+
+gitlab::mysql::db_list:
+      gitlabdb:
+        ensure: present
+        charset: utf8
+        user: git
+        password: database_password
+        host: localhost
+        grant:
+          - all
+
+# This value must be the encrypted password string, with escapes on '$' characters
+# This may be overridden on a per-user basis.  If not explicitly provided, this default will be used.
+gitlab::user::pass: \$2a\$10\$Rr/SD/r9EE
+
+gitlab::user_list:
+  - bob@abc.com:
+      ssh_keys: []
+  - sam@abc.com:
+      ssh_keys:
+        - 'ssh-rsa AAAAB3NzaC1yc2EAAAABJQAAAgEAm48QJUdVMI1vDQKYq8= MySSHKey'
+
+gitlab::group_user::access: 50
+
+# uncomment this after we get the ssh key and deployment arranged for this module
+#gitlab::repo_url_base: 'git@github.com:'
+gitlab::repo_url_base: 'git://github.com/'
+
+gitlab::repo_list:
+  group-name:
+    reponame: 'github-org-name/reponame'
+    
+gitlab::groups_users_list:
+  group-name:
+    - bob@abc.com
+  other-group:
+    - sam@abc.com
+
