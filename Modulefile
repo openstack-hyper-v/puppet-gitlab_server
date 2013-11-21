@@ -9,3 +9,8 @@ description 'A module for configuring and controlling a GitLab server'
 
 dependency 'openstack-hyper-v/puppet-gitlab', '>=0.0.8'
 dependency 'puppetlabs/vcsrepo'
+dependency 'puppetlabs/mysql', '>= 0.6.1'
+dependency 'puppetlabs/stdlib'
+dependency 'jfryman/nginx', '>= 0.0.2'
+dependency 'puppetlabs/ruby', '>= 0.0.2'
+dependency 'openstack-hyper-v/redis', '>= 0.0.6'

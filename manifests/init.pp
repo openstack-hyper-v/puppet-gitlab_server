@@ -14,7 +14,7 @@ class gitlab_server {
   if $::lsbdistcodename == 'precise' {
     package {
       ['build-essential','libssl-dev','libgdbm-dev','libreadline-dev',
-      'libncurses5-dev','libffi-dev','libcurl4-openssl-dev']:
+      'libncurses5-dev','libffi-dev','libcurl4-openssl-dev','ruby1.9.1-dev']:
         ensure => installed;
     }
 
@@ -27,11 +27,15 @@ class gitlab_server {
       'ruby-version':
         command     => '/usr/bin/update-alternatives --set ruby /usr/bin/ruby1.9.1',
         user        => root,
-        logoutput   => 'on_failure';
+        logoutput   => 'on_failure',
+        before      => Class['gitlab'],
+        require     => Package['ruby1.9.1-dev'];
       'gem-version':
         command     => '/usr/bin/update-alternatives --set gem /usr/bin/gem1.9.1',
         user        => root,
-        logoutput   => 'on_failure';
+        logoutput   => 'on_failure',
+        before      => Class['gitlab'],
+        require     => Package['ruby1.9.1-dev'];
     }
   } else {
     $ruby_version = '1:1.9.3'
