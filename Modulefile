@@ -7,7 +7,7 @@ license 'Apache License, Version 2.0'
 summary 'A module for configuring and controlling a GitLab server'
 description 'A module for configuring and controlling a GitLab server'
 
-dependency 'openstack-hyper-v/puppet-gitlab', '>=0.0.8'
+#dependency 'openstack-hyper-v/puppet-gitlab', '>=0.0.8'
 dependency 'puppetlabs/vcsrepo'
 dependency 'puppetlabs/mysql', '>= 0.6.1'
 dependency 'puppetlabs/stdlib'
